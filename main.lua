@@ -24,6 +24,14 @@ SMODS.Atlas({
     atlas_table = "ASSET_ATLAS"
 })
 
+SMODS.Atlas({
+    key = "CustomBoosters", 
+    path = "CustomBoosters.png", 
+    px = 71,
+    py = 95, 
+    atlas_table = "ASSET_ATLAS"
+})
+
 local NFS = require("nativefs")
 to_big = to_big or function(a) return a end
 lenient_bignum = lenient_bignum or function(a) return a end
@@ -42,6 +50,21 @@ local function load_jokers_folder()
     end
 end
 
+
+local editionIndexList = {1}
+
+local function load_editions_folder()
+    local mod_path = SMODS.current_mod.path
+    local editions_path = mod_path .. "/editions"
+    local files = NFS.getDirectoryItemsInfo(editions_path)
+    for i = 1, #editionIndexList do
+        local file_name = files[editionIndexList[i]].name
+        if file_name:sub(-4) == ".lua" then
+            assert(SMODS.load_file("editions/" .. file_name))()
+        end
+    end
+end
+
 function SMODS.current_mod.reset_game_globals(run_start)
       local jokerPool = {}
       for k, v in pairs(G.P_CENTERS) do
@@ -53,7 +76,15 @@ function SMODS.current_mod.reset_game_globals(run_start)
       end
   end
 
-  load_jokers_folder()
+  
+local function load_boosters_file()
+    local mod_path = SMODS.current_mod.path
+    assert(SMODS.load_file("boosters.lua"))()
+end
+
+load_boosters_file()
+load_jokers_folder()
+load_editions_folder()
 SMODS.ObjectType({
     key = "fgm_food",
     cards = {

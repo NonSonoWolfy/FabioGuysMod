@@ -8,7 +8,7 @@ SMODS.Joker{ --Wolfy
     loc_txt = {
         ['name'] = 'Wolfy',
         ['text'] = {
-            [1] = '{C:red}+333{} Molt alle doppie coppie'
+            [1] = '{C:red}+333{} Mult alle doppie coppie'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'

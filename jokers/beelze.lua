@@ -11,7 +11,7 @@ SMODS.Joker{ --Beelze
         ['name'] = 'Beelze',
         ['text'] = {
             [1] = '{C:blue}+1000{} Chips.',
-            [2] = 'Spawna {C:green}Wolfy{} {X:legendary,C:white}Negativo{} ed{X:legendary,C:white} Eterno{}'
+            [2] = 'Spawna {C:green}Wolfy{} {X:legendary,C:white}Negativo{} ed {X:legendary,C:white} Eterno{}'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'

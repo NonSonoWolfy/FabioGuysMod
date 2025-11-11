@@ -7,7 +7,7 @@ SMODS.Joker{ --Mettaton
     loc_txt = {
         ['name'] = 'Mettaton',
         ['text'] = {
-            [1] = 'Scambia Molt e Chips'
+            [1] = 'Scambia Mult e Chips'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'

@@ -38,8 +38,8 @@ SMODS.Joker{ --Ohikkigaya
     in_pool = function(self, args)
           return (
           not args 
-          or args.source ~= 'jud' and args.source ~= 'uta' 
-          or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'wra'
+          or args.source ~= 'buf' and args.source ~= 'jud' and args.source ~= 'uta' 
+          or args.source == 'sho' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'wra'
           )
           and true
       end,

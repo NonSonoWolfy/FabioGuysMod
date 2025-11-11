@@ -8,7 +8,7 @@ SMODS.Joker{ --Roxas
     loc_txt = {
         ['name'] = 'Roxas',
         ['text'] = {
-            [1] = '{C:red}+10{} Molt per ogni carta giocata'
+            [1] = '{C:red}+10{} Mult per ogni carta giocata'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'

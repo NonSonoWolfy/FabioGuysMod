@@ -8,7 +8,7 @@ SMODS.Joker{ --Chara
     loc_txt = {
         ['name'] = 'Chara',
         ['text'] = {
-            [1] = '{C:red}x99999{} Molt'
+            [1] = '{C:red}x99999{} Mult'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -38,8 +38,8 @@ SMODS.Joker{ --Chara
     in_pool = function(self, args)
           return (
           not args 
-          or args.source ~= 'sho' and args.source ~= 'buf' and args.source ~= 'sou' 
-          or args.source == 'jud' or args.source == 'rif' or args.source == 'rta' or args.source == 'uta' or args.source == 'wra'
+          or args.source ~= 'sho' and args.source ~= 'sou' 
+          or args.source == 'buf' or args.source == 'jud' or args.source == 'rif' or args.source == 'rta' or args.source == 'uta' or args.source == 'wra'
           )
           and true
       end,

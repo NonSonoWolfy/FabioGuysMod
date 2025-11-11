@@ -8,7 +8,7 @@ SMODS.Joker{ --Holy Regent
     loc_txt = {
         ['name'] = 'Holy Regent',
         ['text'] = {
-            [1] = '{C:red}+333{} Molt alle coppie'
+            [1] = '{C:red}+333{} Mult alle coppie'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'

@@ -15,7 +15,7 @@ SMODS.Joker{ --Yosuke
         }
     },
     pos = {
-        x = 3,
+        x = 4,
         y = 3
     },
     display_size = {

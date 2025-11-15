@@ -1,28 +1,29 @@
-SMODS.Joker{ --Just_Jai
-    key = "justjai",
+SMODS.Joker{ --Marcia Sovietica
+    key = "marciasovietica",
     config = {
         extra = {
-            dollars = 100
+            cardsindiscard = 0
         }
     },
     loc_txt = {
-        ['name'] = 'Just_Jai',
+        ['name'] = 'Marcia Sovietica',
         ['text'] = {
-            [1] = '{C:money}+100{} Dollari alla fine di ogni round'
+            [1] = 'Prende il numero delle carte scartate',
+            [2] = 'e lo aggiunge a {C:blue}Chips {}e {C:red}Mult{}'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
         }
     },
     pos = {
-        x = 2,
-        y = 2
+        x = 7,
+        y = 4
     },
     display_size = {
         w = 71 * 1, 
         h = 95 * 1
     },
-    cost = 6,
+    cost = 20,
     rarity = 3,
     blueprint_compat = true,
     eternal_compat = true,
@@ -32,8 +33,8 @@ SMODS.Joker{ --Just_Jai
     atlas = 'CustomJokers',
     pools = { ["fgm_fgm_jokers"] = true },
     soul_pos = {
-        x = 3,
-        y = 2
+        x = 8,
+        y = 4
     },
     in_pool = function(self, args)
           return (
@@ -46,10 +47,14 @@ SMODS.Joker{ --Just_Jai
 
     
     calculate = function(self, card, context)
-    if context.end_of_round and context.game_over == false and context.main_eval  then
-        return {
-            dollars = card.ability.extra.dollars,
-            message = "Donazione"
+        if context.cardarea == G.jokers and context.joker_main  then
+            return {
+                chips = #(G.discard and G.discard.cards or {}),
+                message = "PER LA MADREPATRIA",
+                extra = {
+                mult = #(G.discard and G.discard.cards or {}),
+                message = "PER LA MADREPATRIA"
+            }
         }
     end
 end

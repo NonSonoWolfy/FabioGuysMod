@@ -15,7 +15,7 @@ SMODS.Joker{ --Chara
         }
     },
     pos = {
-        x = 1,
+        x = 2,
         y = 1
     },
     display_size = {
@@ -32,7 +32,7 @@ SMODS.Joker{ --Chara
     atlas = 'CustomJokers',
     pools = { ["fgm_fgm_jokers"] = true },
     soul_pos = {
-        x = 2,
+        x = 3,
         y = 1
     },
     in_pool = function(self, args)

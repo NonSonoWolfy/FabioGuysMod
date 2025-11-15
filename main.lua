@@ -36,7 +36,7 @@ local NFS = require("nativefs")
 to_big = to_big or function(a) return a end
 lenient_bignum = lenient_bignum or function(a) return a end
 
-local jokerIndexList = {23,1,7,2,3,4,5,6,8,9,10,11,12,13,14,21,15,24,16,17,18,19,20,22}
+local jokerIndexList = {32,1,7,2,3,4,5,6,8,12,13,15,19,20,21,29,22,33,23,24,25,26,27,30,18,16,10,11,31,28,17,9,14}
 
 local function load_jokers_folder()
     local mod_path = SMODS.current_mod.path
@@ -51,7 +51,7 @@ local function load_jokers_folder()
 end
 
 
-local editionIndexList = {1}
+local editionIndexList = {2,1}
 
 local function load_editions_folder()
     local mod_path = SMODS.current_mod.path
@@ -111,9 +111,16 @@ SMODS.ObjectType({
         ["j_fgm_coppergolem"] = true,
         ["j_fgm_dema"] = true,
         ["j_fgm_demonblad"] = true,
+        ["j_fgm_fabionenazionale"] = true,
+        ["j_fgm_floppydisk"] = true,
+        ["j_fgm_floppyfurry"] = true,
         ["j_fgm_gattodelfuocogiallo"] = true,
         ["j_fgm_holyregent"] = true,
+        ["j_fgm_ilcugino"] = true,
         ["j_fgm_justjai"] = true,
+        ["j_fgm_losburro"] = true,
+        ["j_fgm_lynx"] = true,
+        ["j_fgm_marciasovietica"] = true,
         ["j_fgm_mettaton"] = true,
         ["j_fgm_mrmut"] = true,
         ["j_fgm_myle"] = true,
@@ -123,8 +130,10 @@ SMODS.ObjectType({
         ["j_fgm_rak"] = true,
         ["j_fgm_roxas"] = true,
         ["j_fgm_samus"] = true,
+        ["j_fgm_sonoharuu"] = true,
         ["j_fgm_stefano"] = true,
         ["j_fgm_tokiko"] = true,
+        ["j_fgm_toninogg"] = true,
         ["j_fgm_yosuke"] = true
     },
 })

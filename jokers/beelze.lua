@@ -18,8 +18,8 @@ SMODS.Joker{ --Beelze
         }
     },
     pos = {
-        x = 9,
-        y = 0
+        x = 0,
+        y = 1
     },
     display_size = {
         w = 71 * 1, 
@@ -35,7 +35,7 @@ SMODS.Joker{ --Beelze
     atlas = 'CustomJokers',
     pools = { ["fgm_fgm_jokers"] = true },
     soul_pos = {
-        x = 0,
+        x = 1,
         y = 1
     },
     in_pool = function(self, args)
@@ -52,7 +52,7 @@ SMODS.Joker{ --Beelze
         if context.cardarea == G.jokers and context.joker_main  then
             return {
                 chips = card.ability.extra.chips,
-                message = "UwU"
+                message = "🙏😭"
             }
         end
         if context.buying_card and context.card.config.center.key == self.key and context.cardarea == G.jokers  then

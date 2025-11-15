@@ -15,8 +15,8 @@ SMODS.Joker{ --Holy Regent
         }
     },
     pos = {
-        x = 9,
-        y = 1
+        x = 0,
+        y = 2
     },
     display_size = {
         w = 71 * 1, 
@@ -32,7 +32,7 @@ SMODS.Joker{ --Holy Regent
     atlas = 'CustomJokers',
     pools = { ["fgm_fgm_jokers"] = true },
     soul_pos = {
-        x = 0,
+        x = 1,
         y = 2
     },
     in_pool = function(self, args)

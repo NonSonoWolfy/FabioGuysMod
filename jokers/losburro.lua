@@ -1,29 +1,29 @@
-SMODS.Joker{ --Odra
-    key = "odra",
+SMODS.Joker{ --Losburro
+    key = "losburro",
     config = {
         extra = {
-            mult = 1000
+            chips = 50
         }
     },
     loc_txt = {
-        ['name'] = 'Odra',
+        ['name'] = 'Losburro',
         ['text'] = {
-            [1] = '{C:red}+1000{} Mult'
+            [1] = '{C:blue}+50{} Chips'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
         }
     },
     pos = {
-        x = 2,
-        y = 3
+        x = 9,
+        y = 4
     },
     display_size = {
         w = 71 * 1, 
         h = 95 * 1
     },
-    cost = 41,
-    rarity = 3,
+    cost = 3,
+    rarity = 1,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
@@ -32,14 +32,14 @@ SMODS.Joker{ --Odra
     atlas = 'CustomJokers',
     pools = { ["fgm_fgm_jokers"] = true },
     soul_pos = {
-        x = 3,
-        y = 3
+        x = 0,
+        y = 5
     },
     in_pool = function(self, args)
           return (
           not args 
-          or args.source ~= 'jud' and args.source ~= 'wra' 
-          or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta'
+          or args.source ~= 'sho' and args.source ~= 'jud' and args.source ~= 'rif' 
+          or args.source == 'buf' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
           )
           and true
       end,
@@ -48,8 +48,8 @@ SMODS.Joker{ --Odra
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             return {
-                mult = card.ability.extra.mult,
-                message = "Re del sesso"
+                chips = card.ability.extra.chips,
+                message = "Fanart"
             }
         end
     end

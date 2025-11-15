@@ -15,7 +15,7 @@ SMODS.Joker{ --Ohikkigaya
         }
     },
     pos = {
-        x = 4,
+        x = 5,
         y = 3
     },
     display_size = {
@@ -32,7 +32,7 @@ SMODS.Joker{ --Ohikkigaya
     atlas = 'CustomJokers',
     pools = { ["fgm_fgm_jokers"] = true },
     soul_pos = {
-        x = 5,
+        x = 6,
         y = 3
     },
     in_pool = function(self, args)

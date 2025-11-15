@@ -15,7 +15,7 @@ SMODS.Joker{ --Tokiko
         }
     },
     pos = {
-        x = 4,
+        x = 5,
         y = 4
     },
     display_size = {
@@ -32,7 +32,7 @@ SMODS.Joker{ --Tokiko
     atlas = 'CustomJokers',
     pools = { ["fgm_fgm_jokers"] = true },
     soul_pos = {
-        x = 5,
+        x = 6,
         y = 4
     },
     in_pool = function(self, args)

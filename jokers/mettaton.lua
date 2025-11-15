@@ -14,7 +14,7 @@ SMODS.Joker{ --Mettaton
         }
     },
     pos = {
-        x = 3,
+        x = 4,
         y = 2
     },
     display_size = {
@@ -31,7 +31,7 @@ SMODS.Joker{ --Mettaton
     atlas = 'CustomJokers',
     pools = { ["fgm_fgm_jokers"] = true },
     soul_pos = {
-        x = 4,
+        x = 5,
         y = 2
     },
     in_pool = function(self, args)

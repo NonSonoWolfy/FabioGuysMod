@@ -16,7 +16,7 @@ SMODS.Joker{ --Anisim
         }
     },
     pos = {
-        x = 1,
+        x = 2,
         y = 0
     },
     display_size = {
@@ -33,7 +33,7 @@ SMODS.Joker{ --Anisim
     atlas = 'CustomJokers',
     pools = { ["fgm_fgm_jokers"] = true },
     soul_pos = {
-        x = 2,
+        x = 3,
         y = 0
     },
     in_pool = function(self, args)

@@ -31,6 +31,18 @@ SMODS.Joker{ --Wolfy
     discovered = true,
     atlas = 'CustomJokers',
     pools = { ["fgm_mycustom_jokers"] = true },
+    soul_pos = {
+        x = 1,
+        y = 0
+    },
+    in_pool = function(self, args)
+          return (
+          not args 
+          or args.source ~= 'buf' and args.source ~= 'jud' and args.source ~= 'uta' 
+          or args.source == 'sho' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'wra'
+          )
+          and true
+      end,
 
     
     calculate = function(self, card, context)

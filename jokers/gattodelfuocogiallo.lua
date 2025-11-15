@@ -16,7 +16,7 @@ SMODS.Joker{ --GattoDelFuocoGiallo
         }
     },
     pos = {
-        x = 7,
+        x = 8,
         y = 1
     },
     display_size = {
@@ -33,7 +33,7 @@ SMODS.Joker{ --GattoDelFuocoGiallo
     atlas = 'CustomJokers',
     pools = { ["fgm_fgm_jokers"] = true },
     soul_pos = {
-        x = 8,
+        x = 9,
         y = 1
     },
     in_pool = function(self, args)

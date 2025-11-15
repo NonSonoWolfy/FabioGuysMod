@@ -15,7 +15,7 @@ SMODS.Joker{ --Axiakos
         }
     },
     pos = {
-        x = 7,
+        x = 8,
         y = 0
     },
     display_size = {
@@ -32,7 +32,7 @@ SMODS.Joker{ --Axiakos
     atlas = 'CustomJokers',
     pools = { ["fgm_fgm_jokers"] = true },
     soul_pos = {
-        x = 8,
+        x = 9,
         y = 0
     },
     in_pool = function(self, args)

@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Marcia Sovietica
     key = "marciasovietica",
     config = {
@@ -37,14 +38,18 @@ SMODS.Joker{ --Marcia Sovietica
         y = 4
     },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'jud' and args.source ~= 'wra' 
-          or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'jud' and args.source ~= 'wra' 
+            or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta'
+        )
+        and true
+    end,
+    
+    loc_vars = function(self, info_queue, card)
+        
+        return {vars = {#(G.discard and G.discard.cards or {})}}
+    end,
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
@@ -52,10 +57,10 @@ SMODS.Joker{ --Marcia Sovietica
                 chips = #(G.discard and G.discard.cards or {}),
                 message = "PER LA MADREPATRIA",
                 extra = {
-                mult = #(G.discard and G.discard.cards or {}),
-                message = "PER LA MADREPATRIA"
+                    mult = #(G.discard and G.discard.cards or {}),
+                    message = "PER LA MADREPATRIA"
+                }
             }
-        }
+        end
     end
-end
 }

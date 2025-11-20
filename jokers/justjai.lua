@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Just_Jai
     key = "justjai",
     config = {
@@ -36,21 +37,28 @@ SMODS.Joker{ --Just_Jai
         y = 2
     },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'jud' and args.source ~= 'wra' 
-          or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'jud' and args.source ~= 'wra' 
+            or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta'
+        )
+        and true
+    end,
     
     calculate = function(self, card, context)
-    if context.end_of_round and context.game_over == false and context.main_eval  then
-        return {
-            dollars = card.ability.extra.dollars,
-            message = "Donazione"
-        }
+        if context.end_of_round and context.game_over == false and context.main_eval  then
+            return {
+                
+                func = function()
+                    
+                    local current_dollars = G.GAME.dollars
+                    local target_dollars = G.GAME.dollars + card.ability.extra.dollars
+                    local dollar_value = target_dollars - current_dollars
+                    ease_dollars(dollar_value)
+                    card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Donazione", colour = G.C.MONEY})
+                    return true
+                end
+            }
+        end
     end
-end
 }

@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Lynx
     key = "lynx",
     config = {
@@ -37,14 +38,13 @@ SMODS.Joker{ --Lynx
         y = 6
     },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'buf' and args.source ~= 'jud' and args.source ~= 'rif' 
-          or args.source == 'sho' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'buf' and args.source ~= 'jud' and args.source ~= 'rif' 
+            or args.source == 'sho' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
+        )
+        and true
+    end,
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
@@ -52,10 +52,10 @@ SMODS.Joker{ --Lynx
                 x_chips = card.ability.extra.xchips,
                 message = "CHAOS ",
                 extra = {
-                Xmult = card.ability.extra.Xmult,
-                message = "CHAOS"
+                    Xmult = card.ability.extra.Xmult,
+                    message = "CHAOS"
+                }
             }
-        }
+        end
     end
-end
 }

@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --GattoDelFuocoGiallo
     key = "gattodelfuocogiallo",
     config = {
@@ -37,27 +38,26 @@ SMODS.Joker{ --GattoDelFuocoGiallo
         y = 1
     },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'buf' and args.source ~= 'jud' and args.source ~= 'rta' and args.source ~= 'wra' 
-          or args.source == 'sho' or args.source == 'rif' or args.source == 'sou' or args.source == 'uta'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'buf' and args.source ~= 'jud' and args.source ~= 'rta' and args.source ~= 'wra' 
+            or args.source == 'sho' or args.source == 'rif' or args.source == 'sou' or args.source == 'uta'
+        )
+        and true
+    end,
     
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play  then
             local created_joker = true
             G.E_MANAGER:add_event(Event({
-            func = function()
-                local joker_card = SMODS.add_card({ set = 'Joker', key = 'j_fgm_gattodelfuocogiallo' })
-                if joker_card then
-                    joker_card:set_edition("e_negative", true)
-                    joker_card:add_sticker('eternal', true)
-                end
-                
-                return true
+                func = function()
+                    local joker_card = SMODS.add_card({ set = 'Joker', key = 'j_fgm_gattodelfuocogiallo' })
+                    if joker_card then
+                        joker_card:set_edition(card.ability.extra.e_negative, true)
+                        joker_card:add_sticker('eternal', true)
+                    end
+                    
+                    return true
                 end
             }))
             return {

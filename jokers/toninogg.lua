@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --ToninoGG
     key = "toninogg",
     config = {
@@ -38,19 +39,27 @@ SMODS.Joker{ --ToninoGG
         y = 5
     },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'sho' and args.source ~= 'jud' and args.source ~= 'sou' 
-          or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'uta' or args.source == 'wra'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'sho' and args.source ~= 'jud' and args.source ~= 'sou' 
+            or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'uta' or args.source == 'wra'
+        )
+        and true
+    end,
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             return {
-                dollars = pseudorandom('dollars_059ae209', card.ability.extra.dollars_min, card.ability.extra.dollars_max)
+                
+                func = function()
+                    
+                    local current_dollars = G.GAME.dollars
+                    local target_dollars = G.GAME.dollars + pseudorandom('dollars_059ae209', card.ability.extra.dollars_min, card.ability.extra.dollars_max)
+                    local dollar_value = target_dollars - current_dollars
+                    ease_dollars(dollar_value)
+                    card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+"..tostring(pseudorandom('dollars_059ae209', card.ability.extra.dollars_min, card.ability.extra.dollars_max)), colour = G.C.MONEY})
+                    return true
+                end
             }
         end
     end

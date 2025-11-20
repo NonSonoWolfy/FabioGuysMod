@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Beelze
     key = "beelze",
     config = {
@@ -11,7 +12,7 @@ SMODS.Joker{ --Beelze
         ['name'] = 'Beelze',
         ['text'] = {
             [1] = '{C:blue}+1000{} Chips.',
-            [2] = 'Spawna {C:green}Wolfy{} {X:legendary,C:white}Negativo{} ed {X:legendary,C:white} Eterno{}'
+            [2] = 'Spawna {C:green}Wolfy{}'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -39,14 +40,13 @@ SMODS.Joker{ --Beelze
         y = 1
     },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'buf' and args.source ~= 'jud' and args.source ~= 'uta' 
-          or args.source == 'sho' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'wra'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'buf' and args.source ~= 'jud' and args.source ~= 'uta' 
+            or args.source == 'sho' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'wra'
+        )
+        and true
+    end,
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
@@ -59,25 +59,28 @@ SMODS.Joker{ --Beelze
             return {
                 func = function()
                     
-                    local created_joker = true
-                    G.E_MANAGER:add_event(Event({
-                    func = function()
-                        local joker_card = SMODS.add_card({ set = 'Joker', key = 'j_fgm_wolfy' })
-                        if joker_card then
-                            joker_card:set_edition("e_negative", true)
-                            joker_card:add_sticker('eternal', true)
-                        end
-                        
-                        return true
-                        end
-                    }))
-                    
+                    local created_joker = false
+                    if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                        created_joker = true
+                        G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                local joker_card = SMODS.add_card({ set = 'Joker', key = 'j_fgm_wolfy' })
+                                if joker_card then
+                                    
+                                    joker_card:add_sticker('eternal', true)
+                                end
+                                G.GAME.joker_buffer = 0
+                                return true
+                            end
+                        }))
+                    end
                     if created_joker then
                         card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "oh no...", colour = G.C.BLUE})
                     end
                     return true
-                    end
-                }
-            end
+                end
+            }
         end
+    end
 }

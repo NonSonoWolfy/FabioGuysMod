@@ -1,3 +1,4 @@
+
 SMODS.Edition {
     key = 'bannato',
     shader = 'debuff',
@@ -8,8 +9,8 @@ SMODS.Edition {
     },
     config = {
         extra = {
-            x_chips = -2,
-            x_mult = 2
+            xchips = -2,
+            Xmult = 2
         }
     },
     in_shop = false,
@@ -20,9 +21,9 @@ SMODS.Edition {
         name = 'Bannato',
         label = 'Bannato',
         text = {
-        [1] = '{C:blue}/2 {}Chips.',
-        [2] = '{C:red}*2{} Mult.'
-    }
+            [1] = '{C:blue}/2 {}Chips.',
+            [2] = '{C:red}*2{} Mult.'
+        }
     },
     unlocked = true,
     discovered = true,
@@ -30,10 +31,15 @@ SMODS.Edition {
     get_weight = function(self)
         return G.GAME.edition_rate * self.weight
     end,
-  
+    
     calculate = function(self, card, context)
         if context.pre_joker or (context.main_scoring and context.cardarea == G.play) then
-            return { x_chips = card.edition.extra.x_chips, x_mult = card.edition.extra.x_mult }
+            return {
+                x_chips = card.ability.extra.xchips,
+                extra = {
+                    Xmult = card.ability.extra.Xmult
+                }
+            }
         end
     end
 }

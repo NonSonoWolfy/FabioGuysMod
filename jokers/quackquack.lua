@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --quack quack
     key = "quackquack",
     config = {
@@ -35,14 +36,14 @@ SMODS.Joker{ --quack quack
         y = 3
     },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'sho' and args.source ~= 'jud' and args.source ~= 'sou' 
-          or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'uta' or args.source == 'wra'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'sho' and args.source ~= 'jud' and args.source ~= 'sou' 
+            or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'uta' or args.source == 'wra'
+        )
+        and true
+    end,
+    
     set_ability = function(self, card, initial)
         card:set_eternal(true)
     end

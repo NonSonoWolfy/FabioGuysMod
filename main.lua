@@ -32,6 +32,14 @@ SMODS.Atlas({
     atlas_table = "ASSET_ATLAS"
 })
 
+SMODS.Atlas({
+    key = "CustomDecks", 
+    path = "CustomDecks.png", 
+    px = 71,
+    py = 95, 
+    atlas_table = "ASSET_ATLAS"
+})
+
 local NFS = require("nativefs")
 to_big = to_big or function(a) return a end
 lenient_bignum = lenient_bignum or function(a) return a end
@@ -65,18 +73,33 @@ local function load_editions_folder()
     end
 end
 
-function SMODS.current_mod.reset_game_globals(run_start)
-      local jokerPool = {}
-      for k, v in pairs(G.P_CENTERS) do
-          if v.set == 'Joker' then
-              if (not v.mod) then
-                  G.GAME.banned_keys[k] = true
-              end
-          end
-      end
-  end
 
-  
+local deckIndexList = {1}
+
+local function load_decks_folder()
+    local mod_path = SMODS.current_mod.path
+    local decks_path = mod_path .. "/decks"
+    local files = NFS.getDirectoryItemsInfo(decks_path)
+    for i = 1, #deckIndexList do
+        local file_name = files[deckIndexList[i]].name
+        if file_name:sub(-4) == ".lua" then
+            assert(SMODS.load_file("decks/" .. file_name))()
+        end
+    end
+end
+
+function SMODS.current_mod.reset_game_globals(run_start)
+    local jokerPool = {}
+    for k, v in pairs(G.P_CENTERS) do
+        if v.set == 'Joker' then
+            if (not v.mod) then
+                G.GAME.banned_keys[k] = true
+            end
+        end
+    end
+end
+
+
 local function load_boosters_file()
     local mod_path = SMODS.current_mod.path
     assert(SMODS.load_file("boosters.lua"))()
@@ -85,6 +108,7 @@ end
 load_boosters_file()
 load_jokers_folder()
 load_editions_folder()
+load_decks_folder()
 SMODS.ObjectType({
     key = "fgm_food",
     cards = {
@@ -144,3 +168,10 @@ SMODS.ObjectType({
         ["j_fgm_wolfy"] = true
     },
 })
+
+
+SMODS.current_mod.optional_features = function()
+    return {
+        cardareas = {} 
+    }
+end

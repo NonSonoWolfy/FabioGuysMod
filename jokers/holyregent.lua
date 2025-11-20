@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Holy Regent
     key = "holyregent",
     config = {
@@ -36,14 +37,13 @@ SMODS.Joker{ --Holy Regent
         y = 2
     },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'jud' 
-          or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'jud' 
+            or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
+        )
+        and true
+    end,
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then

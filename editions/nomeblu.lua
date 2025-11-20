@@ -1,3 +1,4 @@
+
 SMODS.Edition {
     key = 'nomeblu',
     shader = 'foil',
@@ -20,8 +21,8 @@ SMODS.Edition {
         name = 'Nome blu',
         label = 'Nome blu',
         text = {
-        [1] = '{C:blue}+1000{} Chips'
-    }
+            [1] = '{C:blue}+1000{} Chips'
+        }
     },
     unlocked = true,
     discovered = true,
@@ -29,10 +30,13 @@ SMODS.Edition {
     get_weight = function(self)
         return G.GAME.edition_rate * self.weight
     end,
-  
+    
     calculate = function(self, card, context)
         if context.pre_joker or (context.main_scoring and context.cardarea == G.play) then
-            return { chips = card.edition.extra.chips }
+            return {
+                chips = card.ability.extra.chips,
+                message = "Nome blu"
+            }
         end
     end
 }

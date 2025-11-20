@@ -1,9 +1,11 @@
+
 SMODS.Joker{ --Il Cugino
     key = "ilcugino",
     config = {
         extra = {
             no = 0,
-            var1 = 0
+            var1 = 0,
+            start_dissolve = 0
         }
     },
     loc_txt = {
@@ -37,18 +39,17 @@ SMODS.Joker{ --Il Cugino
         y = 6
     },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'sho' and args.source ~= 'jud' and args.source ~= 'sou' 
-          or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'uta' or args.source == 'wra'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'sho' and args.source ~= 'jud' and args.source ~= 'sou' 
+            or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'uta' or args.source == 'wra'
+        )
+        and true
+    end,
+    
     set_ability = function(self, card, initial)
         card:set_eternal(true)
     end,
-
     
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play  then
@@ -63,9 +64,9 @@ SMODS.Joker{ --Il Cugino
             if target_joker then
                 target_joker.getting_sliced = true
                 G.E_MANAGER:add_event(Event({
-                func = function()
-                    target_joker:start_dissolve({G.C.RED}, nil, 1.6)
-                    return true
+                    func = function()
+                        target_joker:start_dissolve({G.C.RED}, nil, 1.6)
+                        return true
                     end
                 }))
                 card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Tu ti limoni i maschi", colour = G.C.RED})

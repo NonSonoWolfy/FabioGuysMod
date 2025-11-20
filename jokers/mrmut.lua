@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --MrMut
     key = "mrmut",
     config = {
@@ -37,14 +38,18 @@ SMODS.Joker{ --MrMut
         y = 2
     },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'jud' and args.source ~= 'wra' 
-          or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'jud' and args.source ~= 'wra' 
+            or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta'
+        )
+        and true
+    end,
+    
+    loc_vars = function(self, info_queue, card)
+        
+        return {vars = {card.ability.extra.Jokers, (#(G.jokers and (G.jokers and G.jokers.cards or {}) or {})) * 3}}
+    end,
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then

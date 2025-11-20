@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Fabione Nazionale
     key = "fabionenazionale",
     config = {
@@ -36,27 +37,28 @@ SMODS.Joker{ --Fabione Nazionale
         y = 6
     },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'sho' and args.source ~= 'jud' and args.source ~= 'rif' 
-          or args.source == 'buf' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'sho' and args.source ~= 'jud' and args.source ~= 'rif' 
+            or args.source == 'buf' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
+        )
+        and true
+    end,
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             return {
+                
                 func = function()
-                    local target_amount = card.ability.extra.dollars
-                    local current_amount = G.GAME.dollars
-                    local difference = target_amount - current_amount
-                        ease_dollars(difference)
-                            card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Non riuscivo a dargli la abilità di mettere ante 39", colour = G.C.MONEY})
-                            return true
-                            end
-                        }
-                    end
+                    
+                    local current_dollars = G.GAME.dollars
+                    local target_dollars = card.ability.extra.dollars
+                    local dollar_value = target_dollars - current_dollars
+                    ease_dollars(dollar_value)
+                    card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Non riuscivo a dargli la abilità di mettere ante 39", colour = G.C.MONEY})
+                    return true
                 end
+            }
+        end
+    end
 }

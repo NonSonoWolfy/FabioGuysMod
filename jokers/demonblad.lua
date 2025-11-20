@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --DemonBlad
     key = "demonblad",
     config = {
@@ -37,14 +38,13 @@ SMODS.Joker{ --DemonBlad
         y = 1
     },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'buf' and args.source ~= 'jud' and args.source ~= 'rta' and args.source ~= 'wra' 
-          or args.source == 'sho' or args.source == 'rif' or args.source == 'sou' or args.source == 'uta'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'buf' and args.source ~= 'jud' and args.source ~= 'rta' and args.source ~= 'wra' 
+            or args.source == 'sho' or args.source == 'rif' or args.source == 'sou' or args.source == 'uta'
+        )
+        and true
+    end,
     
     calculate = function(self, card, context)
         if context.buying_card and context.card.config.center.key == self.key and context.cardarea == G.jokers  then
@@ -53,14 +53,14 @@ SMODS.Joker{ --DemonBlad
                     
                     local created_joker = true
                     G.E_MANAGER:add_event(Event({
-                    func = function()
-                        local joker_card = SMODS.add_card({ set = 'Joker' })
-                        if joker_card then
-                            joker_card:set_edition("e_negative", true)
-                            joker_card:add_sticker('eternal', true)
-                        end
-                        
-                        return true
+                        func = function()
+                            local joker_card = SMODS.add_card({ set = 'Joker' })
+                            if joker_card then
+                                joker_card:set_edition(card.ability.extra.e_negative, true)
+                                joker_card:add_sticker('eternal', true)
+                            end
+                            
+                            return true
                         end
                     }))
                     
@@ -68,8 +68,8 @@ SMODS.Joker{ --DemonBlad
                         card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Gambling", colour = G.C.BLUE})
                     end
                     return true
-                    end
-                }
-            end
+                end
+            }
         end
+    end
 }

@@ -1,9 +1,11 @@
+
 SMODS.Joker{ --CopperGolem
     key = "coppergolem",
     config = {
         extra = {
             no = 0,
-            var1 = 0
+            var1 = 0,
+            start_dissolve = 0
         }
     },
     loc_txt = {
@@ -37,14 +39,13 @@ SMODS.Joker{ --CopperGolem
         y = 1
     },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'jud' and args.source ~= 'rif' 
-          or args.source == 'sho' or args.source == 'buf' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'jud' and args.source ~= 'rif' 
+            or args.source == 'sho' or args.source == 'buf' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
+        )
+        and true
+    end,
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
@@ -59,9 +60,9 @@ SMODS.Joker{ --CopperGolem
             if target_joker then
                 target_joker.getting_sliced = true
                 G.E_MANAGER:add_event(Event({
-                func = function()
-                    target_joker:start_dissolve({G.C.RED}, nil, 1.6)
-                    return true
+                    func = function()
+                        target_joker:start_dissolve({G.C.RED}, nil, 1.6)
+                        return true
                     end
                 }))
                 card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "lmao", colour = G.C.RED})

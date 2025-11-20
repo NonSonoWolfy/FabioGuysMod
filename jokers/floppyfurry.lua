@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --フロッピーディスク
     key = "floppyfurry",
     config = {
@@ -37,34 +38,18 @@ SMODS.Joker{ --フロッピーディスク
         y = 5
     },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'sho' and args.source ~= 'buf' and args.source ~= 'jud' and args.source ~= 'rif' 
-          or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'sho' and args.source ~= 'buf' and args.source ~= 'jud' and args.source ~= 'rif' 
+            or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
+        )
+        and true
+    end,
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             if context.scoring_name == "Five of a Kind" then
-                G.E_MANAGER:add_event(Event({
-                blocking = false,
-                func = function()
-                    if G.STATE == G.STATES.SELECTING_HAND then
-                        G.GAME.chips = G.GAME.blind.chips
-                        G.STATE = G.STATES.HAND_PLAYED
-                        G.STATE_COMPLETE = true
-                    end_round()
-                    return true
-                    end
-                end
-            }))
-            return {
-                message = "UwU"
-            }
+            end
         end
     end
-end
 }

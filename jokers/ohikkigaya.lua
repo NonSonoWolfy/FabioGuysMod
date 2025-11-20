@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Ohikkigaya
     key = "ohikkigaya",
     config = {
@@ -36,14 +37,13 @@ SMODS.Joker{ --Ohikkigaya
         y = 3
     },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'buf' and args.source ~= 'jud' and args.source ~= 'uta' 
-          or args.source == 'sho' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'wra'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'buf' and args.source ~= 'jud' and args.source ~= 'uta' 
+            or args.source == 'sho' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'wra'
+        )
+        and true
+    end,
     
     calculate = function(self, card, context)
         if context.buying_card and context.card.config.center.key == self.key and context.cardarea == G.jokers  then
@@ -55,14 +55,14 @@ SMODS.Joker{ --Ohikkigaya
                         created_joker = true
                         G.GAME.joker_buffer = G.GAME.joker_buffer + 1
                         G.E_MANAGER:add_event(Event({
-                        func = function()
-                            local joker_card = SMODS.add_card({ set = 'Joker' })
-                            if joker_card then
-                                
-                                
-                            end
-                            G.GAME.joker_buffer = 0
-                            return true
+                            func = function()
+                                local joker_card = SMODS.add_card({ set = 'Joker' })
+                                if joker_card then
+                                    
+                                    
+                                end
+                                G.GAME.joker_buffer = 0
+                                return true
                             end
                         }))
                     end
@@ -70,8 +70,8 @@ SMODS.Joker{ --Ohikkigaya
                         card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Scelgo te!", colour = G.C.BLUE})
                     end
                     return true
-                    end
-                }
-            end
+                end
+            }
         end
+    end
 }

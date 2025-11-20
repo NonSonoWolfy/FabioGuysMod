@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Roxas
     key = "roxas",
     config = {
@@ -36,14 +37,18 @@ SMODS.Joker{ --Roxas
         y = 4
     },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'jud' and args.source ~= 'rif' 
-          or args.source == 'sho' or args.source == 'buf' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'jud' and args.source ~= 'rif' 
+            or args.source == 'sho' or args.source == 'buf' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
+        )
+        and true
+    end,
+    
+    loc_vars = function(self, info_queue, card)
+        
+        return {vars = {(#(G.playing_cards or {})) * 10}}
+    end,
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then

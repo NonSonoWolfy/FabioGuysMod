@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Chara
     key = "chara",
     config = {
@@ -36,21 +37,20 @@ SMODS.Joker{ --Chara
         y = 1
     },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'sho' and args.source ~= 'sou' 
-          or args.source == 'buf' or args.source == 'jud' or args.source == 'rif' or args.source == 'rta' or args.source == 'uta' or args.source == 'wra'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'sho' and args.source ~= 'sou' 
+            or args.source == 'buf' or args.source == 'jud' or args.source == 'rif' or args.source == 'rta' or args.source == 'uta' or args.source == 'wra'
+        )
+        and true
+    end,
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             return {
                 Xmult = card.ability.extra.Xmult,
-                message = "=)"
-            }
-        end
+            message = "=)"
+        }
     end
+end
 }

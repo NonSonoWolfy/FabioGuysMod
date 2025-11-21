@@ -25,8 +25,32 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
+    key = "CustomConsumables", 
+    path = "CustomConsumables.png", 
+    px = 71,
+    py = 95, 
+    atlas_table = "ASSET_ATLAS"
+})
+
+SMODS.Atlas({
     key = "CustomBoosters", 
     path = "CustomBoosters.png", 
+    px = 71,
+    py = 95, 
+    atlas_table = "ASSET_ATLAS"
+})
+
+SMODS.Atlas({
+    key = "CustomEnhancements", 
+    path = "CustomEnhancements.png", 
+    px = 71,
+    py = 95, 
+    atlas_table = "ASSET_ATLAS"
+})
+
+SMODS.Atlas({
+    key = "CustomVouchers", 
+    path = "CustomVouchers.png", 
     px = 71,
     py = 95, 
     atlas_table = "ASSET_ATLAS"
@@ -59,6 +83,47 @@ local function load_jokers_folder()
 end
 
 
+local consumableIndexList = {1}
+
+local function load_consumables_folder()
+    local mod_path = SMODS.current_mod.path
+    local consumables_path = mod_path .. "/consumables"
+    local files = NFS.getDirectoryItemsInfo(consumables_path)
+    local set_file_number = #files + 1
+    for i = 1, #files do
+        if files[i].name == "sets.lua" then
+            assert(SMODS.load_file("consumables/sets.lua"))()
+            set_file_number = i
+        end
+    end    
+    for i = 1, #consumableIndexList do
+        local j = consumableIndexList[i]
+        if j >= set_file_number then 
+            j = j + 1
+        end
+        local file_name = files[j].name
+        if file_name:sub(-4) == ".lua" then
+            assert(SMODS.load_file("consumables/" .. file_name))()
+        end
+    end
+end
+
+
+local enhancementIndexList = {1}
+
+local function load_enhancements_folder()
+    local mod_path = SMODS.current_mod.path
+    local enhancements_path = mod_path .. "/enhancements"
+    local files = NFS.getDirectoryItemsInfo(enhancements_path)
+    for i = 1, #enhancementIndexList do
+        local file_name = files[enhancementIndexList[i]].name
+        if file_name:sub(-4) == ".lua" then
+            assert(SMODS.load_file("enhancements/" .. file_name))()
+        end
+    end
+end
+
+
 local editionIndexList = {2,1}
 
 local function load_editions_folder()
@@ -69,6 +134,21 @@ local function load_editions_folder()
         local file_name = files[editionIndexList[i]].name
         if file_name:sub(-4) == ".lua" then
             assert(SMODS.load_file("editions/" .. file_name))()
+        end
+    end
+end
+
+
+local voucherIndexList = {1}
+
+local function load_vouchers_folder()
+    local mod_path = SMODS.current_mod.path
+    local vouchers_path = mod_path .. "/vouchers"
+    local files = NFS.getDirectoryItemsInfo(vouchers_path)
+    for i = 1, #voucherIndexList do
+        local file_name = files[voucherIndexList[i]].name
+        if file_name:sub(-4) == ".lua" then
+            assert(SMODS.load_file("vouchers/" .. file_name))()
         end
     end
 end
@@ -107,7 +187,10 @@ end
 
 load_boosters_file()
 load_jokers_folder()
+load_consumables_folder()
+load_enhancements_folder()
 load_editions_folder()
+load_vouchers_folder()
 load_decks_folder()
 SMODS.ObjectType({
     key = "fgm_food",

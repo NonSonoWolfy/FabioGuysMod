@@ -9,7 +9,6 @@ SMODS.Edition {
     },
     config = {
         extra = {
-            xchips = -2,
             Xmult = 2
         }
     },
@@ -21,8 +20,8 @@ SMODS.Edition {
         name = 'Bannato',
         label = 'Bannato',
         text = {
-            [1] = '{C:blue}/2 {}Chips.',
-            [2] = '{C:red}*2{} Mult.'
+            [1] = '{C:red}*2{} Mult',
+            [2] = 'Distruggi questa carta'
         }
     },
     unlocked = true,
@@ -34,11 +33,10 @@ SMODS.Edition {
     
     calculate = function(self, card, context)
         if context.pre_joker or (context.main_scoring and context.cardarea == G.play) then
+            card.should_destroy = false
+            card.should_destroy = true
             return {
-                x_chips = card.ability.extra.xchips,
-                extra = {
-                    Xmult = card.ability.extra.Xmult
-                }
+                Xmult = card.ability.extra.Xmult
             }
         end
     end

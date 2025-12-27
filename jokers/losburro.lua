@@ -3,7 +3,7 @@ SMODS.Joker{ --Losburro
     key = "losburro",
     config = {
         extra = {
-            chips = 50
+            chips0 = 50
         }
     },
     loc_txt = {
@@ -31,7 +31,7 @@ SMODS.Joker{ --Losburro
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_pacchetti"] = true },
     soul_pos = {
         x = 0,
         y = 5
@@ -39,8 +39,8 @@ SMODS.Joker{ --Losburro
     in_pool = function(self, args)
         return (
             not args 
-            or args.source ~= 'sho' and args.source ~= 'jud' and args.source ~= 'rif' 
-            or args.source == 'buf' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
+            or args.source ~= 'jud' 
+            or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
         )
         and true
     end,
@@ -48,7 +48,7 @@ SMODS.Joker{ --Losburro
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             return {
-                chips = card.ability.extra.chips,
+                chips = 50,
                 message = "Fanart"
             }
         end

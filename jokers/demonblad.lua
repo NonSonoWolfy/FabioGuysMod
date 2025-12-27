@@ -3,14 +3,13 @@ SMODS.Joker{ --DemonBlad
     key = "demonblad",
     config = {
         extra = {
-            eternal = 0,
-            ignore = 0
         }
     },
     loc_txt = {
         ['name'] = 'DemonBlad',
         ['text'] = {
-            [1] = 'Spawna un Joker casuale'
+            [1] = 'Spawna un Joker casuale',
+            [2] = 'Non serve spazio'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'

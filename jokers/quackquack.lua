@@ -3,6 +3,8 @@ SMODS.Joker{ --quack quack
     key = "quackquack",
     config = {
         extra = {
+            odds = 100,
+            dollars0 = 1000
         }
     },
     loc_txt = {
@@ -30,21 +32,38 @@ SMODS.Joker{ --quack quack
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_leggendari"] = true },
     soul_pos = {
         x = 8,
         y = 3
     },
-    in_pool = function(self, args)
-        return (
-            not args 
-            or args.source ~= 'sho' and args.source ~= 'jud' and args.source ~= 'sou' 
-            or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'uta' or args.source == 'wra'
-        )
-        and true
+    
+    loc_vars = function(self, info_queue, card)
+        
+        local new_numerator, new_denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'j_fgm_quackquack') 
+        return {vars = {new_numerator, new_denominator}}
     end,
     
     set_ability = function(self, card, initial)
         card:set_eternal(true)
-    end
-}
+    end,
+    
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main  then
+            if true then
+                if SMODS.pseudorandom_probability(card, 'group_0_650eae7f', 1, card.ability.extra.odds, 'j_fgm_quackquack', false) then
+                    SMODS.calculate_effect({
+                        func = function()
+                            
+                            local current_dollars = G.GAME.dollars
+                            local target_dollars = G.GAME.dollars + 1000
+                            local dollar_value = target_dollars - current_dollars
+                            ease_dollars(dollar_value)
+                            card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+"..tostring(1000), colour = G.C.MONEY})
+                            return true
+                        end}, card)
+                    end
+                end
+            end
+        end
+    }

@@ -8,9 +8,8 @@ SMODS.Joker{ --フロッピーディスク
     loc_txt = {
         ['name'] = 'フロッピーディスク',
         ['text'] = {
-            [1] = 'Se le carte giocate sono 5 e',
-            [2] = 'dello stesso numero, vinci',
-            [3] = 'la blind'
+            [1] = 'Se le carte giocate valide sono 5,',
+            [2] = 'vinci la blind'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -48,7 +47,22 @@ SMODS.Joker{ --フロッピーディスク
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
-            if context.scoring_name == "Five of a Kind" then
+            if to_big(#context.scoring_hand) == to_big(5) then
+                G.E_MANAGER:add_event(Event({
+                    blocking = false,
+                    func = function()
+                        if G.STATE == G.STATES.SELECTING_HAND then
+                            G.GAME.chips = G.GAME.blind.chips
+                            G.STATE = G.STATES.HAND_PLAYED
+                            G.STATE_COMPLETE = true
+                            end_round()
+                            return true
+                        end
+                    end
+                }))
+                return {
+                    message = "Win!"
+                }
             end
         end
     end

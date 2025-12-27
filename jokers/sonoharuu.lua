@@ -3,6 +3,7 @@ SMODS.Joker{ --Sonoharuu
     key = "sonoharuu",
     config = {
         extra = {
+            odds = 2
         }
     },
     loc_txt = {
@@ -30,23 +31,42 @@ SMODS.Joker{ --Sonoharuu
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_leggendari"] = true },
     soul_pos = {
         x = 8,
         y = 5
     },
-    in_pool = function(self, args)
-        return (
-            not args 
-            or args.source ~= 'sho' 
-            or args.source == 'buf' or args.source == 'jud' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
-        )
-        and true
+    
+    loc_vars = function(self, info_queue, card)
+        
+        local new_numerator, new_denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'j_fgm_sonoharuu')
+        local new_numerator2, new_denominator2 = SMODS.get_probability_vars(card, 1, card.ability.extra.odds2, 'j_fgm_sonoharuu')
+        return {vars = {new_numerator, new_denominator, new_numerator2, new_denominator2}}
     end,
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
-            error("LMAOOOO")
+            if true then
+                if SMODS.pseudorandom_probability(card, 'group_0_05f3c3a2', 1, card.ability.extra.odds, 'j_fgm_sonoharuu', false) then
+                    error("EasternFarmer Was Here")
+                    
+                end
+                if SMODS.pseudorandom_probability(card, 'group_1_749f512b', 1, card.ability.extra.odds, 'j_fgm_sonoharuu', false) then
+                    G.E_MANAGER:add_event(Event({
+                        blocking = false,
+                        func = function()
+                            if G.STATE == G.STATES.SELECTING_HAND then
+                                G.GAME.chips = G.GAME.blind.chips
+                                G.STATE = G.STATES.HAND_PLAYED
+                                G.STATE_COMPLETE = true
+                                end_round()
+                                return true
+                            end
+                        end
+                    }))
+                    card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Win!", colour = G.C.ORANGE})
+                end
+            end
         end
     end
 }

@@ -3,13 +3,13 @@ SMODS.Joker{ --Chara
     key = "chara",
     config = {
         extra = {
-            Xmult = 99999
+            xmult0 = 999999999999999
         }
     },
     loc_txt = {
         ['name'] = 'Chara',
         ['text'] = {
-            [1] = '{C:red}x99999{} Mult'
+            [1] = '{C:red}x999999999999999{} Mult'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -31,7 +31,7 @@ SMODS.Joker{ --Chara
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_leggendari"] = true },
     soul_pos = {
         x = 3,
         y = 1
@@ -39,8 +39,8 @@ SMODS.Joker{ --Chara
     in_pool = function(self, args)
         return (
             not args 
-            or args.source ~= 'sho' and args.source ~= 'sou' 
-            or args.source == 'buf' or args.source == 'jud' or args.source == 'rif' or args.source == 'rta' or args.source == 'uta' or args.source == 'wra'
+            or args.source ~= 'sho' 
+            or args.source == 'buf' or args.source == 'jud' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
         )
         and true
     end,
@@ -48,7 +48,7 @@ SMODS.Joker{ --Chara
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             return {
-                Xmult = card.ability.extra.Xmult,
+                Xmult = 999999999999999,
             message = "=)"
         }
     end

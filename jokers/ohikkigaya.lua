@@ -3,13 +3,13 @@ SMODS.Joker{ --Ohikkigaya
     key = "ohikkigaya",
     config = {
         extra = {
-            ignore = 0
         }
     },
     loc_txt = {
         ['name'] = 'Ohikkigaya',
         ['text'] = {
-            [1] = 'Spawna un Joker qualsiasi'
+            [1] = 'Spawna un Joker qualsiasi',
+            [2] = 'Non serve spazio'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -50,27 +50,42 @@ SMODS.Joker{ --Ohikkigaya
             return {
                 func = function()
                     
-                    local created_joker = false
-                    if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-                        created_joker = true
-                        G.GAME.joker_buffer = G.GAME.joker_buffer + 1
-                        G.E_MANAGER:add_event(Event({
-                            func = function()
-                                local joker_card = SMODS.add_card({ set = 'Joker' })
-                                if joker_card then
-                                    
-                                    
-                                end
-                                G.GAME.joker_buffer = 0
-                                return true
+                    local created_joker = true
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            local joker_card = SMODS.add_card({ set = 'Joker' })
+                            if joker_card then
+                                
+                                
                             end
-                        }))
-                    end
+                            
+                            return true
+                        end
+                    }))
+                    
                     if created_joker then
                         card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Scelgo te!", colour = G.C.BLUE})
                     end
                     return true
-                end
+                end,
+                extra = {
+                    func = function()
+                        local target_joker = card
+                        
+                        if target_joker then
+                            target_joker.getting_sliced = true
+                            G.E_MANAGER:add_event(Event({
+                                func = function()
+                                    target_joker:start_dissolve({G.C.RED}, nil, 1.6)
+                                    return true
+                                end
+                            }))
+                            card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Destroyed!", colour = G.C.RED})
+                        end
+                        return true
+                    end,
+                    colour = G.C.RED
+                }
             }
         end
     end

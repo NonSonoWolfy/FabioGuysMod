@@ -3,15 +3,15 @@ SMODS.Joker{ --ToninoGG
     key = "toninogg",
     config = {
         extra = {
-            dollars_min = 0,
-            dollars_max = 1000
+            dollars0_min = NaN,
+            dollars0_max = 1000
         }
     },
     loc_txt = {
         ['name'] = 'ToninoGG',
         ['text'] = {
             [1] = '{C:attention}Guadagna {}un range di soldi',
-            [2] = '{C:green}da 1 a 1000{}'
+            [2] = '{C:green}da 1 a 1000${}'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -33,7 +33,7 @@ SMODS.Joker{ --ToninoGG
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_leggendari"] = true },
     soul_pos = {
         x = 6,
         y = 5
@@ -41,8 +41,8 @@ SMODS.Joker{ --ToninoGG
     in_pool = function(self, args)
         return (
             not args 
-            or args.source ~= 'sho' and args.source ~= 'jud' and args.source ~= 'sou' 
-            or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'uta' or args.source == 'wra'
+            or args.source ~= 'jud' 
+            or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
         )
         and true
     end,
@@ -54,10 +54,10 @@ SMODS.Joker{ --ToninoGG
                 func = function()
                     
                     local current_dollars = G.GAME.dollars
-                    local target_dollars = G.GAME.dollars + pseudorandom('dollars_059ae209', card.ability.extra.dollars_min, card.ability.extra.dollars_max)
+                    local target_dollars = G.GAME.dollars + pseudorandom('RANGE:0|1000', 0, 1000)
                     local dollar_value = target_dollars - current_dollars
                     ease_dollars(dollar_value)
-                    card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+"..tostring(pseudorandom('dollars_059ae209', card.ability.extra.dollars_min, card.ability.extra.dollars_max)), colour = G.C.MONEY})
+                    card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+"..tostring(pseudorandom('RANGE:0|1000', 0, 1000)), colour = G.C.MONEY})
                     return true
                 end
             }

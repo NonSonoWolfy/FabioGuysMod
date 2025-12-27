@@ -9,8 +9,9 @@ SMODS.Joker{ --Marcia Sovietica
     loc_txt = {
         ['name'] = 'Marcia Sovietica',
         ['text'] = {
-            [1] = 'Prende il numero delle carte scartate',
-            [2] = 'e lo aggiunge a {C:blue}Chips {}e {C:red}Mult{}'
+            [1] = 'Prende il numero delle carte scartate,',
+            [2] = 'lo moltiplica per 10 e',
+            [3] = 'lo aggiunge a {C:blue}Chips {}e {C:red}Mult{}'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -32,32 +33,24 @@ SMODS.Joker{ --Marcia Sovietica
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_pacchetti"] = true },
     soul_pos = {
         x = 8,
         y = 4
     },
-    in_pool = function(self, args)
-        return (
-            not args 
-            or args.source ~= 'jud' and args.source ~= 'wra' 
-            or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta'
-        )
-        and true
-    end,
     
     loc_vars = function(self, info_queue, card)
         
-        return {vars = {#(G.discard and G.discard.cards or {})}}
+        return {vars = {(#(G.discard and G.discard.cards or {})) * 10}}
     end,
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             return {
-                chips = #(G.discard and G.discard.cards or {}),
+                chips = (#(G.discard and G.discard.cards or {})) * 10,
                 message = "PER LA MADREPATRIA",
                 extra = {
-                    mult = #(G.discard and G.discard.cards or {}),
+                    mult = (#(G.discard and G.discard.cards or {})) * 10,
                     message = "PER LA MADREPATRIA"
                 }
             }

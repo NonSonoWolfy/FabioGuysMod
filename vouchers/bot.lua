@@ -4,7 +4,7 @@ SMODS.Voucher {
     pos = { x = 0, y = 0 },
     config = { 
         extra = {
-            dollars = 50
+            dollars0 = 50
         } 
     },
     loc_txt = {
@@ -29,10 +29,10 @@ SMODS.Voucher {
                 func = function()
                     
                     local current_dollars = G.GAME.dollars
-                    local target_dollars = G.GAME.dollars + card.ability.extra.dollars
+                    local target_dollars = G.GAME.dollars + 50
                     local dollar_value = target_dollars - current_dollars
                     ease_dollars(dollar_value, true)
-                    card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Bot", colour = G.C.MONEY})
+                    card_eval_status_text(card, 'extra', nil, nil, nil, {message = "Bot", colour = G.C.MONEY})
                     return true
                 end
             }

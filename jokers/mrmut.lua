@@ -10,7 +10,7 @@ SMODS.Joker{ --MrMut
     loc_txt = {
         ['name'] = 'MrMut',
         ['text'] = {
-            [1] = '{C:red}+3{} Mult per ogni Joker'
+            [1] = '{C:red}+10{} Mult per ogni Joker'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -32,7 +32,7 @@ SMODS.Joker{ --MrMut
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_pacchetti"] = true },
     soul_pos = {
         x = 7,
         y = 2
@@ -40,21 +40,21 @@ SMODS.Joker{ --MrMut
     in_pool = function(self, args)
         return (
             not args 
-            or args.source ~= 'jud' and args.source ~= 'wra' 
-            or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta'
+            or args.source ~= 'jud' 
+            or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
         )
         and true
     end,
     
     loc_vars = function(self, info_queue, card)
         
-        return {vars = {card.ability.extra.Jokers, (#(G.jokers and (G.jokers and G.jokers.cards or {}) or {})) * 3}}
+        return {vars = {card.ability.extra.Jokers, (#(G.jokers and (G.jokers and G.jokers.cards or {}) or {})) * 10}}
     end,
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             return {
-                mult = (#(G.jokers and G.jokers.cards or {})) * 3,
+                mult = (#(G.jokers and G.jokers.cards or {})) * 10,
                 message = "Astratto"
             }
         end

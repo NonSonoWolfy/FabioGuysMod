@@ -10,6 +10,7 @@ SMODS.Booster {
     },
     config = { extra = 3, choose = 1 },
     cost = 100,
+    weight = 7.2,
     atlas = "CustomBoosters",
     pos = { x = 0, y = 0 },
     group_key = "fgm_boosters",
@@ -22,7 +23,7 @@ SMODS.Booster {
     end,
     create_card = function(self, card, i)
         return {
-            set = "Joker",
+            set = "fgm_leggendari",
             rarity = "Legendary",
             area = G.pack_cards,
             skip_materialize = true,
@@ -51,6 +52,7 @@ SMODS.Booster {
         },
         config = { extra = 3, choose = 1 },
         cost = 30,
+        weight = 4.6,
         atlas = "CustomBoosters",
         pos = { x = 1, y = 0 },
         group_key = "fgm_boosters",
@@ -63,7 +65,7 @@ SMODS.Booster {
         end,
         create_card = function(self, card, i)
             return {
-                set = "Joker",
+                set = "fgm_pacchetti",
                 edition = "e_fgm_nomeblu",
                 area = G.pack_cards,
                 skip_materialize = true,
@@ -82,16 +84,17 @@ SMODS.Booster {
         
         
         SMODS.Booster {
-            key = 'sigma_aah_pack',
+            key = 's1gm4_44h_p4ck',
             loc_txt = {
-                name = "Sigma aah pack",
+                name = "S1gm4 44h p4ck",
                 text = {
-                    [1] = '5 Joker'
+                    [1] = '{C:uncommon}5 J0k3r{}'
                 },
                 group_name = "fgm_boosters"
             },
-            config = { extra = 5, choose = 5 },
+            config = { extra = 5, choose = 1 },
             cost = 50,
+            weight = 10,
             atlas = "CustomBoosters",
             pos = { x = 2, y = 0 },
             group_key = "fgm_boosters",
@@ -104,7 +107,56 @@ SMODS.Booster {
             end,
             create_card = function(self, card, i)
                 return {
-                    set = "Joker",
+                    set = "Playing Card",
+                    edition = "e_fgm_venduto",
+                    area = G.pack_cards,
+                    skip_materialize = true,
+                    soulable = true,
+                    key_append = "fgm_s1gm4_44h_p4ck"
+                }
+            end,
+            particles = function(self)
+                G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
+                    timer = 0.015,
+                    scale = 0.3,
+                    initialize = true,
+                    lifespan = 3,
+                    speed = 0.2,
+                    padding = -1,
+                    attach = G.ROOM_ATTACH,
+                    colours = { G.C.BLACK, G.C.RED },
+                    fill = true
+                })
+                G.booster_pack_sparkles.fade_alpha = 1
+                G.booster_pack_sparkles:fade(1, 0)
+            end,
+        }
+        
+        
+        SMODS.Booster {
+            key = 'sigma_aah_pack',
+            loc_txt = {
+                name = "Sigma aah pack",
+                text = {
+                    [1] = '5 joker'
+                },
+                group_name = "fgm_boosters"
+            },
+            config = { extra = 5, choose = 5 },
+            cost = 50,
+            atlas = "CustomBoosters",
+            pos = { x = 3, y = 0 },
+            group_key = "fgm_boosters",
+            discovered = true,
+            loc_vars = function(self, info_queue, card)
+                local cfg = (card and card.ability) or self.config
+                return {
+                    vars = { cfg.choose, cfg.extra }
+                }
+            end,
+            create_card = function(self, card, i)
+                return {
+                    set = "fgm_pacchetti",
                     area = G.pack_cards,
                     skip_materialize = true,
                     soulable = true,
@@ -116,3 +168,39 @@ SMODS.Booster {
                 end,
             }
             
+            
+            SMODS.Booster {
+                key = 'nomi_rossi',
+                loc_txt = {
+                    name = "Nomi rossi",
+                    text = {
+                        [1] = '{C:red}Ahah sfigato{}'
+                    },
+                    group_name = "fgm_boosters"
+                },
+                config = { extra = 3, choose = 1 },
+                atlas = "CustomBoosters",
+                pos = { x = 4, y = 0 },
+                group_key = "fgm_boosters",
+                discovered = true,
+                loc_vars = function(self, info_queue, card)
+                    local cfg = (card and card.ability) or self.config
+                    return {
+                        vars = { cfg.choose, cfg.extra }
+                    }
+                end,
+                create_card = function(self, card, i)
+                    return {
+                        set = "fgm_pacchetti",
+                        edition = "e_fgm_bannato",
+                        area = G.pack_cards,
+                        skip_materialize = true,
+                        soulable = true,
+                        key_append = "fgm_nomi_rossi"
+                    }
+                end,
+                particles = function(self)
+                    -- No particles for joker packs
+                    end,
+                }
+                

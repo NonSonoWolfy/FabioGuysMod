@@ -8,7 +8,7 @@ SMODS.Joker{ --Mettaton
     loc_txt = {
         ['name'] = 'Mettaton',
         ['text'] = {
-            [1] = 'Scambia Mult e Chips'
+            [1] = 'Scambia {C:red}Mult {}e {C:blue}Chips{}'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -30,19 +30,11 @@ SMODS.Joker{ --Mettaton
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_pacchetti"] = true },
     soul_pos = {
         x = 5,
         y = 2
     },
-    in_pool = function(self, args)
-        return (
-            not args 
-            or args.source ~= 'jud' and args.source ~= 'rif' 
-            or args.source == 'sho' or args.source == 'buf' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
-        )
-        and true
-    end,
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then

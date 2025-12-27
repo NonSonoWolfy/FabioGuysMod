@@ -3,8 +3,8 @@ SMODS.Joker{ --Lynx
     key = "lynx",
     config = {
         extra = {
-            xchips = 2,
-            Xmult = 2
+            xchips0 = 2,
+            xmult0 = 2
         }
     },
     loc_txt = {
@@ -32,27 +32,19 @@ SMODS.Joker{ --Lynx
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_pacchetti"] = true },
     soul_pos = {
         x = 0,
         y = 6
     },
-    in_pool = function(self, args)
-        return (
-            not args 
-            or args.source ~= 'buf' and args.source ~= 'jud' and args.source ~= 'rif' 
-            or args.source == 'sho' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
-        )
-        and true
-    end,
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             return {
-                x_chips = card.ability.extra.xchips,
+                x_chips = 2,
                 message = "CHAOS ",
                 extra = {
-                    Xmult = card.ability.extra.Xmult,
+                    Xmult = 2,
                     message = "CHAOS"
                 }
             }

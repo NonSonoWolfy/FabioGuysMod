@@ -3,7 +3,7 @@ SMODS.Joker{ --Anisim
     key = "anisim",
     config = {
         extra = {
-            dollars = 10
+            dollars0 = 10
         }
     },
     loc_txt = {
@@ -32,7 +32,7 @@ SMODS.Joker{ --Anisim
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_pacchetti"] = true },
     soul_pos = {
         x = 3,
         y = 0
@@ -40,8 +40,8 @@ SMODS.Joker{ --Anisim
     in_pool = function(self, args)
         return (
             not args 
-            or args.source ~= 'jud' and args.source ~= 'rif' 
-            or args.source == 'sho' or args.source == 'buf' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
+            or args.source ~= 'jud' 
+            or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
         )
         and true
     end,
@@ -54,7 +54,7 @@ SMODS.Joker{ --Anisim
                     func = function()
                         
                         local current_dollars = G.GAME.dollars
-                        local target_dollars = G.GAME.dollars + card.ability.extra.dollars
+                        local target_dollars = G.GAME.dollars + 10
                         local dollar_value = target_dollars - current_dollars
                         ease_dollars(dollar_value)
                         card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Clip", colour = G.C.MONEY})

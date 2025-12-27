@@ -3,7 +3,7 @@ SMODS.Joker{ --Just_Jai
     key = "justjai",
     config = {
         extra = {
-            dollars = 100
+            dollars0 = 100
         }
     },
     loc_txt = {
@@ -31,7 +31,7 @@ SMODS.Joker{ --Just_Jai
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_pacchetti"] = true },
     soul_pos = {
         x = 3,
         y = 2
@@ -39,8 +39,8 @@ SMODS.Joker{ --Just_Jai
     in_pool = function(self, args)
         return (
             not args 
-            or args.source ~= 'jud' and args.source ~= 'wra' 
-            or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta'
+            or args.source ~= 'jud' 
+            or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
         )
         and true
     end,
@@ -52,7 +52,7 @@ SMODS.Joker{ --Just_Jai
                 func = function()
                     
                     local current_dollars = G.GAME.dollars
-                    local target_dollars = G.GAME.dollars + card.ability.extra.dollars
+                    local target_dollars = G.GAME.dollars + 100
                     local dollar_value = target_dollars - current_dollars
                     ease_dollars(dollar_value)
                     card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Donazione", colour = G.C.MONEY})

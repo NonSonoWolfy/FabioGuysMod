@@ -9,10 +9,11 @@ SMODS.Edition {
     },
     config = {
         extra = {
-            chips = 1000
+            chips0 = 1000
         }
     },
     in_shop = false,
+    weight = 10,
     apply_to_float = true,
     badge_colour = HEX('0091ff'),
     disable_shadow = false,
@@ -34,7 +35,7 @@ SMODS.Edition {
     calculate = function(self, card, context)
         if context.pre_joker or (context.main_scoring and context.cardarea == G.play) then
             return {
-                chips = card.ability.extra.chips,
+                chips = 1000,
                 message = "Nome blu"
             }
         end

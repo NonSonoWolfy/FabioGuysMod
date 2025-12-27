@@ -3,7 +3,7 @@ SMODS.Joker{ --Yosuke
     key = "yosuke",
     config = {
         extra = {
-            Xmult = 10
+            xmult0 = 10
         }
     },
     loc_txt = {
@@ -31,12 +31,12 @@ SMODS.Joker{ --Yosuke
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_pacchetti"] = true },
     in_pool = function(self, args)
         return (
             not args 
-            or args.source ~= 'jud' and args.source ~= 'wra' 
-            or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta'
+            or args.source ~= 'jud' 
+            or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
         )
         and true
     end,
@@ -44,7 +44,7 @@ SMODS.Joker{ --Yosuke
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             return {
-                Xmult = card.ability.extra.Xmult,
+                Xmult = 10,
                 message = "CAZZO USI LE PFP ROTONDE"
             }
         end

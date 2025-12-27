@@ -3,7 +3,7 @@ SMODS.Joker{ --Fabione Nazionale
     key = "fabionenazionale",
     config = {
         extra = {
-            dollars = 3000
+            dollars0 = 3000
         }
     },
     loc_txt = {
@@ -31,7 +31,7 @@ SMODS.Joker{ --Fabione Nazionale
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_leggendari"] = true },
     soul_pos = {
         x = 2,
         y = 6
@@ -39,8 +39,8 @@ SMODS.Joker{ --Fabione Nazionale
     in_pool = function(self, args)
         return (
             not args 
-            or args.source ~= 'sho' and args.source ~= 'jud' and args.source ~= 'rif' 
-            or args.source == 'buf' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
+            or args.source ~= 'rif' 
+            or args.source == 'sho' or args.source == 'buf' or args.source == 'jud' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
         )
         and true
     end,
@@ -52,7 +52,7 @@ SMODS.Joker{ --Fabione Nazionale
                 func = function()
                     
                     local current_dollars = G.GAME.dollars
-                    local target_dollars = card.ability.extra.dollars
+                    local target_dollars = 3000
                     local dollar_value = target_dollars - current_dollars
                     ease_dollars(dollar_value)
                     card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Non riuscivo a dargli la abilità di mettere ante 39", colour = G.C.MONEY})

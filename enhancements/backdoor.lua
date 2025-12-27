@@ -4,8 +4,8 @@ SMODS.Enhancement {
     pos = { x = 0, y = 0 },
     config = {
         extra = {
-            xchips = 10,
-            Xmult = 10
+            xchips0 = 10,
+            xmult0 = 10
         }
     },
     loc_txt = {
@@ -27,10 +27,10 @@ SMODS.Enhancement {
     calculate = function(self, card, context)
         if context.main_scoring and context.cardarea == G.play then
             return {
-                x_chips = card.ability.extra.xchips,
+                x_chips = 10,
                 message = "Backdoor",
                 extra = {
-                    Xmult = card.ability.extra.Xmult,
+                    Xmult = 10,
                     message = "Backdoor"
                 }
             }

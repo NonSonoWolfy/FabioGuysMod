@@ -3,9 +3,6 @@ SMODS.Joker{ --Il Cugino
     key = "ilcugino",
     config = {
         extra = {
-            no = 0,
-            var1 = 0,
-            start_dissolve = 0
         }
     },
     loc_txt = {
@@ -33,19 +30,11 @@ SMODS.Joker{ --Il Cugino
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_leggendari"] = true },
     soul_pos = {
         x = 4,
         y = 6
     },
-    in_pool = function(self, args)
-        return (
-            not args 
-            or args.source ~= 'sho' and args.source ~= 'jud' and args.source ~= 'sou' 
-            or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'uta' or args.source == 'wra'
-        )
-        and true
-    end,
     
     set_ability = function(self, card, initial)
         card:set_eternal(true)

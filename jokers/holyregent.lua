@@ -3,13 +3,12 @@ SMODS.Joker{ --Holy Regent
     key = "holyregent",
     config = {
         extra = {
-            mult = 333
         }
     },
     loc_txt = {
         ['name'] = 'Holy Regent',
         ['text'] = {
-            [1] = '{C:red}+333{} Mult alle coppie'
+            [1] = 'Bilancia {C:red}Mult {}e {C:blue}Chips{}'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -31,7 +30,7 @@ SMODS.Joker{ --Holy Regent
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_pacchetti"] = true },
     soul_pos = {
         x = 1,
         y = 2
@@ -47,12 +46,10 @@ SMODS.Joker{ --Holy Regent
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
-            if context.scoring_name == "Pair" then
-                return {
-                    mult = card.ability.extra.mult,
-                    message = "Chaos"
-                }
-            end
+            return {
+                balance = true,
+                message = "Wolfy è ovunque in qualsiasi tempo"
+            }
         end
     end
 }

@@ -3,8 +3,8 @@ SMODS.Joker{ --Rak
     key = "rak",
     config = {
         extra = {
-            xchips = 100,
-            Xmult = 100
+            xchips0 = 100,
+            xmult0 = 100
         }
     },
     loc_txt = {
@@ -33,7 +33,7 @@ SMODS.Joker{ --Rak
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_leggendari"] = true },
     soul_pos = {
         x = 0,
         y = 4
@@ -41,8 +41,8 @@ SMODS.Joker{ --Rak
     in_pool = function(self, args)
         return (
             not args 
-            or args.source ~= 'sho' and args.source ~= 'jud' and args.source ~= 'sou' 
-            or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'uta' or args.source == 'wra'
+            or args.source ~= 'jud' 
+            or args.source == 'sho' or args.source == 'buf' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
         )
         and true
     end,
@@ -50,10 +50,10 @@ SMODS.Joker{ --Rak
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             return {
-                x_chips = card.ability.extra.xchips,
+                x_chips = 100,
                 message = "Stfu Wolfy",
                 extra = {
-                    Xmult = card.ability.extra.Xmult,
+                    Xmult = 100,
                     message = "Stfu Wolfy"
                 }
             }

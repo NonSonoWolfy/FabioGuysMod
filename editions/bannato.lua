@@ -9,10 +9,11 @@ SMODS.Edition {
     },
     config = {
         extra = {
-            Xmult = 2
+            xmult0 = 10
         }
     },
     in_shop = false,
+    weight = 20,
     apply_to_float = false,
     disable_shadow = false,
     disable_base_shader = false,
@@ -20,8 +21,8 @@ SMODS.Edition {
         name = 'Bannato',
         label = 'Bannato',
         text = {
-            [1] = '{C:red}*2{} Mult',
-            [2] = 'Distruggi questa carta'
+            [1] = '{C:red}*10{} Mult',
+            [2] = 'Distruggi un Joker'
         }
     },
     unlocked = true,
@@ -33,10 +34,29 @@ SMODS.Edition {
     
     calculate = function(self, card, context)
         if context.pre_joker or (context.main_scoring and context.cardarea == G.play) then
-            card.should_destroy = false
-            card.should_destroy = true
+            local destructable_jokers = {}
+            for i, joker in ipairs(G.jokers.cards) do
+                if not joker.ability.eternal and not joker.getting_sliced then
+                    table.insert(destructable_jokers, joker)
+                end
+            end
+            local target_joker = #destructable_jokers > 0 and pseudorandom_element(destructable_jokers, pseudoseed('destroy_joker_enhanced')) or nil
+            
+            if target_joker then
+                target_joker.getting_sliced = true
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        target_joker:start_dissolve({G.C.RED}, nil, 1.6)
+                        return true
+                    end
+                }))
+            end
             return {
-                Xmult = card.ability.extra.Xmult
+                Xmult = 10,
+                extra = {
+                    message = "Bannato",
+                    colour = G.C.RED
+                }
             }
         end
     end

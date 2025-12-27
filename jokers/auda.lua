@@ -3,14 +3,13 @@ SMODS.Joker{ --Auda
     key = "auda",
     config = {
         extra = {
-            eternal = 0,
-            ignore = 0
         }
     },
     loc_txt = {
         ['name'] = 'Auda',
         ['text'] = {
-            [1] = 'Spawna {C:green}Dema{}'
+            [1] = 'Spawna {C:green}Dema{}',
+            [2] = 'Non serve spazio'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -68,7 +67,25 @@ SMODS.Joker{ --Auda
                         card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "VC", colour = G.C.BLUE})
                     end
                     return true
-                end
+                end,
+                extra = {
+                    func = function()
+                        local target_joker = card
+                        
+                        if target_joker then
+                            target_joker.getting_sliced = true
+                            G.E_MANAGER:add_event(Event({
+                                func = function()
+                                    target_joker:start_dissolve({G.C.RED}, nil, 1.6)
+                                    return true
+                                end
+                            }))
+                            card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Destroyed!", colour = G.C.RED})
+                        end
+                        return true
+                    end,
+                    colour = G.C.RED
+                }
             }
         end
     end

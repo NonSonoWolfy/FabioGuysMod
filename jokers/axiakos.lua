@@ -3,7 +3,7 @@ SMODS.Joker{ --Axiakos
     key = "axiakos",
     config = {
         extra = {
-            chips = 1000
+            chips0 = 1000
         }
     },
     loc_txt = {
@@ -31,7 +31,7 @@ SMODS.Joker{ --Axiakos
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_pacchetti"] = true },
     soul_pos = {
         x = 9,
         y = 0
@@ -48,7 +48,7 @@ SMODS.Joker{ --Axiakos
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             return {
-                chips = card.ability.extra.chips,
+                chips = 1000,
                 message = "Ban"
             }
         end

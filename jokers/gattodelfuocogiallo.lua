@@ -3,8 +3,6 @@ SMODS.Joker{ --GattoDelFuocoGiallo
     key = "gattodelfuocogiallo",
     config = {
         extra = {
-            eternal = 0,
-            ignore = 0
         }
     },
     loc_txt = {
@@ -25,14 +23,14 @@ SMODS.Joker{ --GattoDelFuocoGiallo
         h = 95 * 1
     },
     cost = 60,
-    rarity = 3,
+    rarity = 4,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-    pools = { ["fgm_fgm_jokers"] = true },
+    pools = { ["fgm_leggendari"] = true },
     soul_pos = {
         x = 9,
         y = 1
@@ -40,8 +38,8 @@ SMODS.Joker{ --GattoDelFuocoGiallo
     in_pool = function(self, args)
         return (
             not args 
-            or args.source ~= 'buf' and args.source ~= 'jud' and args.source ~= 'rta' and args.source ~= 'wra' 
-            or args.source == 'sho' or args.source == 'rif' or args.source == 'sou' or args.source == 'uta'
+            or args.source ~= 'rta' and args.source ~= 'wra' 
+            or args.source == 'sho' or args.source == 'buf' or args.source == 'jud' or args.source == 'rif' or args.source == 'sou' or args.source == 'uta'
         )
         and true
     end,

@@ -49,6 +49,14 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
+    key = "CustomSeals", 
+    path = "CustomSeals.png", 
+    px = 71,
+    py = 95, 
+    atlas_table = "ASSET_ATLAS"
+}):register()
+
+SMODS.Atlas({
     key = "CustomVouchers", 
     path = "CustomVouchers.png", 
     px = 71,
@@ -68,7 +76,7 @@ local NFS = require("nativefs")
 to_big = to_big or function(a) return a end
 lenient_bignum = lenient_bignum or function(a) return a end
 
-local jokerIndexList = {33,1,7,2,3,4,5,6,8,12,13,15,19,20,21,30,23,34,24,25,26,27,28,31,18,16,10,11,32,29,17,9,14,22}
+local jokerIndexList = {34,1,8,2,3,4,5,6,9,13,14,16,20,21,22,31,24,35,25,26,27,28,29,32,19,17,11,12,33,30,18,10,15,23,7}
 
 local function load_jokers_folder()
     local mod_path = SMODS.current_mod.path
@@ -83,7 +91,7 @@ local function load_jokers_folder()
 end
 
 
-local consumableIndexList = {2,1}
+local consumableIndexList = {4,2,3,1}
 
 local function load_consumables_folder()
     local mod_path = SMODS.current_mod.path
@@ -109,7 +117,7 @@ local function load_consumables_folder()
 end
 
 
-local enhancementIndexList = {1}
+local enhancementIndexList = {1,2}
 
 local function load_enhancements_folder()
     local mod_path = SMODS.current_mod.path
@@ -119,6 +127,21 @@ local function load_enhancements_folder()
         local file_name = files[enhancementIndexList[i]].name
         if file_name:sub(-4) == ".lua" then
             assert(SMODS.load_file("enhancements/" .. file_name))()
+        end
+    end
+end
+
+
+local sealIndexList = {1}
+
+local function load_seals_folder()
+    local mod_path = SMODS.current_mod.path
+    local seals_path = mod_path .. "/seals"
+    local files = NFS.getDirectoryItemsInfo(seals_path)
+    for i = 1, #sealIndexList do
+        local file_name = files[sealIndexList[i]].name
+        if file_name:sub(-4) == ".lua" then
+            assert(SMODS.load_file("seals/" .. file_name))()
         end
     end
 end
@@ -139,7 +162,7 @@ local function load_editions_folder()
 end
 
 
-local voucherIndexList = {1}
+local voucherIndexList = {1,2}
 
 local function load_vouchers_folder()
     local mod_path = SMODS.current_mod.path
@@ -189,6 +212,7 @@ load_boosters_file()
 load_jokers_folder()
 load_consumables_folder()
 load_enhancements_folder()
+load_seals_folder()
 load_editions_folder()
 load_vouchers_folder()
 load_decks_folder()
@@ -237,6 +261,7 @@ SMODS.ObjectType({
     cards = {
         ["j_fgm_auda"] = true,
         ["j_fgm_coppergolem"] = true,
+        ["j_fgm_cripto"] = true,
         ["j_fgm_demonblad"] = true,
         ["j_fgm_floppyfurry"] = true,
         ["j_fgm_nonsonowolfy"] = true,

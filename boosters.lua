@@ -93,7 +93,7 @@ SMODS.Booster {
                 group_name = "fgm_boosters"
             },
             config = { extra = 5, choose = 1 },
-            cost = 50,
+            cost = 200,
             weight = 10,
             atlas = "CustomBoosters",
             pos = { x = 2, y = 0 },

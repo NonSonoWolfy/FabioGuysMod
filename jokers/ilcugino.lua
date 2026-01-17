@@ -8,7 +8,9 @@ SMODS.Joker{ --Il Cugino
     loc_txt = {
         ['name'] = 'Il Cugino',
         ['text'] = {
-            [1] = '{C:red}x2394578902341{} Mult'
+            [1] = 'Quando una mano viene giocata,',
+            [2] = 'distrugge il joker alla sua destra e',
+            [3] = 'crea un {C:legendary}joker leggendario{}'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -41,16 +43,26 @@ SMODS.Joker{ --Il Cugino
     end,
     
     calculate = function(self, card, context)
-        if context.individual and context.cardarea == G.play  then
-            local destructable_jokers = {}
-            for i, joker in ipairs(G.jokers.cards) do
-                if joker ~= card and not SMODS.is_eternal(joker) and not joker.getting_sliced then
-                    table.insert(destructable_jokers, joker)
+        if context.cardarea == G.jokers and context.joker_main  then
+            local my_pos = nil
+            for i = 1, #G.jokers.cards do
+                if G.jokers.cards[i] == card then
+                    my_pos = i
+                    break
                 end
             end
-            local target_joker = #destructable_jokers > 0 and pseudorandom_element(destructable_jokers, pseudoseed('destroy_joker')) or nil
+            local target_joker = nil
+            if my_pos and my_pos < #G.jokers.cards then
+                local joker = G.jokers.cards[my_pos + 1]
+                if true and not joker.getting_sliced then
+                    target_joker = joker
+                end
+            end
             
             if target_joker then
+                if target_joker.ability.eternal then
+                    target_joker.ability.eternal = nil
+                end
                 target_joker.getting_sliced = true
                 G.E_MANAGER:add_event(Event({
                     func = function()
@@ -60,6 +72,21 @@ SMODS.Joker{ --Il Cugino
                 }))
                 card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Tu ti limoni i maschi", colour = G.C.RED})
             end
+            local created_joker = true
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    local joker_card = SMODS.add_card({ set = 'Joker', rarity = 'Legendary' })
+                    if joker_card then
+                        
+                        
+                    end
+                    
+                    return true
+                end
+            }))
+            return {
+                message = "Redemption Arc"
+            }
         end
     end
 }

@@ -1,9 +1,9 @@
 
-SMODS.Shader({ key = 'overexposed', path = 'overexposed.fs' })
+SMODS.Shader({ key = 'monochrome', path = 'monochrome.fs' })
 
 SMODS.Edition {
     key = 'venduto',
-    shader = 'overexposed',
+    shader = 'monochrome',
     config = {
         extra = {
             xmult0 = 10000000000000000,

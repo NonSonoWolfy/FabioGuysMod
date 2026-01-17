@@ -5,7 +5,7 @@
 #endif
 
 // Look ionized.fs for explanation
-extern PRECISION vec2 overexposed;
+extern PRECISION vec2 monochrome;
 
 extern PRECISION number dissolve;
 extern PRECISION number time;
@@ -17,16 +17,17 @@ extern bool shadow;
 extern PRECISION vec4 burn_colour_1;
 extern PRECISION vec4 burn_colour_2;
 
+// [Util]
+// Transform color from HSL to RGB 
+vec4 RGB(vec4 c);
+
+// [Util]
+// Transform color from RGB to HSL
+vec4 HSL(vec4 c);
+
 // [Required] 
 // Apply dissolve effect (when card is being "burnt", e.g. when consumable is used)
 vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv);
-
-vec3 reinhardToneMap(vec3 color, float exposure)
-{
-    color *= exposure/(1. + color / exposure);
-    color = pow(color, vec3(1. / 2.2));
-    return color;
-}
 
 // This is what actually changes the look of card
 vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )
@@ -35,29 +36,75 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     vec4 tex = Texel(texture, texture_coords);
     // Position of a pixel within the sprite
 	vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
+    float t = monochrome.y + time;
+    float adjust_value = fract(0.08*t);
 
-    vec4 basetex = Texel(texture, texture_coords);
-    float t = overexposed.g + time;
+    vec3 linear = tex.rgb;
+    vec4 hslSuit = HSL(vec4(1,0,0,1));
+    vec4 hsl = HSL(tex); // convert texture to HSL values
 
-
-    if (tex.a == 0){
-        tex.a = 0;
-    } else {
-    vec3 color = tex.rgb;
-    float rate = 1.5 - uv.y - 0.3*sin(0.8*t);
-    if(rate > 1){
-        rate = 1 - mod(rate, 1);
+    if (monochrome.y > 0.0 || monochrome.y < 0.0) {
+        if (hsl.z == 1) {
+            tex.a = 0;
+        }
     }
-    color *= (2.3 * rate);
-    vec3 newColor = reinhardToneMap(color, 1.5);
-    // newColor += 0.5*sin(overexposed.r*0.12512);
-    tex = vec4(newColor, 1.);
-    
-    float ratio = 0.9;
-    tex = ratio*tex + (1-ratio)*basetex;
-}
+
+    linear.r = pow(linear.r, 2.2);
+    linear.g = pow(linear.g, 2.2);
+    linear.b = pow(linear.b, 2.2);
+    hslSuit.z = (linear.r + linear.g + linear.b)/3;
+    hslSuit = RGB(hslSuit);
+    tex = vec4(hslSuit.rgb, tex.a);
+
+    vec4 temp = HSL(tex);
+    temp.r = adjust_value;
+    tex = RGB(temp);
+
     // required
 	return dissolve_mask(tex*colour, texture_coords, uv);
+}
+
+number hue(number s, number t, number h)
+{
+	number hs = mod(h, 1.)*6.;
+	if (hs < 1.) return (t-s) * hs + s;
+	if (hs < 3.) return t;
+	if (hs < 4.) return (t-s) * (4.-hs) + s;
+	return s;
+}
+
+vec4 RGB(vec4 c)
+{
+	if (c.y < 0.0001)
+		return vec4(vec3(c.z), c.a);
+
+	number t = (c.z < .5) ? c.y*c.z + c.z : -c.y*c.z + (c.y+c.z);
+	number s = 2.0 * c.z - t;
+	return vec4(hue(s,t,c.x + 1./3.), hue(s,t,c.x), hue(s,t,c.x - 1./3.), c.w);
+}
+
+vec4 HSL(vec4 c)
+{
+	number low = min(c.r, min(c.g, c.b));
+	number high = max(c.r, max(c.g, c.b));
+	number delta = high - low;
+	number sum = high+low;
+
+	vec4 hsl = vec4(.0, .0, .5 * sum, c.a);
+	if (delta == .0)
+		return hsl;
+
+	hsl.y = (hsl.z < .5) ? delta / sum : delta / (2.0 - sum);
+
+	if (high == c.r)
+		hsl.x = (c.g - c.b) / delta;
+	else if (high == c.g)
+		hsl.x = (c.b - c.r) / delta + 2.0;
+	else
+		hsl.x = (c.r - c.g) / delta + 4.0;
+
+	hsl.x = mod(hsl.x / 6., 1.);
+	return hsl;
 }
 
 vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv)
